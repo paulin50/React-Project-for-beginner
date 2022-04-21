@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import React from 'react';
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
+import ContactPage from './components/pages/ContactPage';
+import AboutPage from './components/pages/AboutPage';
+import HomePage from './components/pages/HomePage';
+import NavBar from './components/layout/NavBar';
+import PageNotFound from './components/pages/PageNotFound';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ProductListing from './components/pages/ProductListing';
+import ProductDetails from './components/pages/ProductDetails';
+import Header from './components/pages/Header';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <NavBar/>
+        <Header/>
+        {/* <NavBar/> */}
+        <Routes>
+          {/* <Route exact path='/' element={<HomePage/>}/> */}
+          <Route exact path='/' element={<ProductListing />}/>
+          <Route path="/product/:productId" element={ <ProductDetails/> } />
+          <Route exact path='/about' element={<AboutPage/>}/>
+          <Route exact path='/contact' element={<ContactPage/>}/>
+          <Route path='*' element={<PageNotFound/>}/>
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
